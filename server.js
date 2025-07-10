@@ -30,6 +30,10 @@ const server = http.createServer((req, res) => {
         const fullPath = path.join(publicDir, filePath);
         
         fs.readFile(fullPath, (err, content) => {
+            if(err) {
+                res.writeHead(404);
+                return res.end("File tidak ditemukan");
+            }
             const ext = path.extname(fullPath);
             const contentType = ext === '.css' ? 'text/css':
                                 ext === '.js' ? 'text/javascript':
@@ -37,6 +41,7 @@ const server = http.createServer((req, res) => {
             res.writeHead(200, { 'content-type': contentType});
             res.end(content);
         });
+
     }else if(req.method === 'POST' && req.url === '/alat'){
          let body = '';
          req.on('data', chunk => body += chunk);
