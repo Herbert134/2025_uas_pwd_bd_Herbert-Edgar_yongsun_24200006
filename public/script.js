@@ -18,7 +18,7 @@ document.getElementById('orderForm').addEventListener('submit', async function(e
     e.preventDefault();
     const form = e.target;
     const data = new URLSearchParams(new FormData(form));
-    const res = await fetch('/order', {
+    const res = await fetch('/alat', {
     method: 'POST',
     body: data,
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
